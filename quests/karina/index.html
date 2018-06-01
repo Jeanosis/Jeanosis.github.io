@@ -55,8 +55,14 @@
 	</div>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
+			var geo_options = {
+				enableHighAccuracy: true,
+				timeout: 2000,
+				maximumAge: 0
+			};
+
 			if (navigator.geolocation) {
-				navigator.geolocation.watchPosition(showPosition);
+				navigator.geolocation.watchPosition(showPosition, showError, geo_options);
 			} else {
 				document.querySelector('.q-text-cont').innerHTML = "Geolocation is not supported by this browser.";
 			}
@@ -66,6 +72,10 @@
 			console.log('POSITION', position.coords);
 			document.querySelector('.q-location-lat').innerHTML = position.coords.latitude;
 			document.querySelector('.q-location-long').innerHTML = position.coords.longitude; 
+		}
+
+		function showError(error) {
+			console.log('Something went wrong', error);
 		}
 	</script>
 </body>
