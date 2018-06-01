@@ -50,8 +50,10 @@
 	</div>
 	<script>
 		var checkpoint = {
-			lat: 48.459358,
-			long: 35.064679
+			// lat: 48.459358,
+			// long: 35.064679
+			lat: 48.458942,
+			long: 35.070549
 		};
 
 		document.addEventListener('DOMContentLoaded', function () {
@@ -79,13 +81,27 @@
 
 			var locationElem = document.querySelector('.q-location-checkpoint');
 
-			if (distance <= 0.00003) {
+			// if (distance <= 0.00003) {
+			// 	locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
+			// } else if (distance <= 0.00006) {
+			// 	locationElem.innerHTML = 'You are near the place!';
+			// } else if (distance <= 0.0001) {
+			// 	locationElem.innerHTML = 'Really hot!!!';
+			// } else if (distance <= 0.00015) {
+			// 	locationElem.innerHTML = 'Hotter';
+			// } else {
+			// 	locationElem.innerHTML = 'Cold';
+			// }
+			// 48.458735, 35.070173
+			// 48.458937, 35.070577
+			console.log('DISTANCE', distance_lat, distance_long, '|', distance);
+			if (distance <= 0.0001) {
 				locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
-			} else if (distance <= 0.00006) {
+			} else if (distance <= 0.0002) {
 				locationElem.innerHTML = 'You are near the place!';
-			} else if (distance <= 0.0001) {
+			} else if (distance <= 0.0004) {
 				locationElem.innerHTML = 'Really hot!!!';
-			} else if (distance <= 0.00015) {
+			} else if (distance <= 0.0005) {
 				locationElem.innerHTML = 'Hotter';
 			} else {
 				locationElem.innerHTML = 'Cold';
