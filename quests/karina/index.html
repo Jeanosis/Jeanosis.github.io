@@ -95,13 +95,13 @@
 			// 48.458735, 35.070173
 			// 48.458937, 35.070577
 			console.log('DISTANCE', distance_lat, distance_long, '|', distance);
-			if (distance <= 0.0001) {
+			if (distance <= 0.0002) {
 				locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
-			} else if (distance <= 0.0002) {
-				locationElem.innerHTML = 'You are near the place!';
 			} else if (distance <= 0.0004) {
+				locationElem.innerHTML = 'You are near the place!';
+			} else if (distance <= 0.0008) {
 				locationElem.innerHTML = 'Really hot!!!';
-			} else if (distance <= 0.0005) {
+			} else if (distance <= 0.001) {
 				locationElem.innerHTML = 'Hotter';
 			} else {
 				locationElem.innerHTML = 'Cold';
