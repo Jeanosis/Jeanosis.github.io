@@ -46,6 +46,7 @@
 			<div>Longtitude:</div>
 			<div class="q-location-long"></div>
 			<div class="q-location-checkpoint"></div>
+			<div class="q-location-distance"></div>
 		</div>
 	</div>
 	<script>
@@ -106,6 +107,8 @@
 			} else {
 				locationElem.innerHTML = 'Cold';
 			}
+
+			document.querySelector('.q-location-distance').innerHTML = distance;
 		}
 
 		function showError(error) {
