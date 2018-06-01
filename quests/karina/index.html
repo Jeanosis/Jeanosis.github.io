@@ -79,7 +79,6 @@
 
 			var locationElem = document.querySelector('.q-location-checkpoint');
 
-			locationElem.style.display = distance <= 0.0001 ? 'display' : 'none';
 			if (distance <= 0.00003) {
 				locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
 			} else if (distance <= 0.00006) {
