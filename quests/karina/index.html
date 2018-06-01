@@ -29,16 +29,11 @@
 			top: 50%;
 			transform: translate(-50%, -50%);
 			width: auto;
-			border: 1px solid red;
 			color: white;
 		}
 
 		.q-location-headline {
 			white-space: nowrap;
-		}
-
-		.q-location-checkpoint {
-			display: none;
 		}
 	</style>
 </head>
@@ -50,28 +45,52 @@
 			<div class="q-location-lat"></div>
 			<div>Longtitude:</div>
 			<div class="q-location-long"></div>
-			<div class="q-location-checkpoint">You are in Heisenberg Coffee Lab!</div>
+			<div class="q-location-checkpoint"></div>
 		</div>
 	</div>
 	<script>
+		var checkpoint = {
+			lat: 48.459358,
+			long: 35.064679
+		};
+
 		document.addEventListener('DOMContentLoaded', function () {
 			var geo_options = {
 				enableHighAccuracy: true,
-				timeout: 2000,
+				timeout: 5000,
 				maximumAge: 0
 			};
 
 			if (navigator.geolocation) {
 				navigator.geolocation.watchPosition(showPosition, showError, geo_options);
+				// navigator.geolocation.getCurrentPosition(
 			} else {
 				document.querySelector('.q-text-cont').innerHTML = "Geolocation is not supported by this browser.";
 			}
 		});
 		
 		function showPosition(position) {
-			console.log('POSITION', position.coords);
 			document.querySelector('.q-location-lat').innerHTML = position.coords.latitude;
-			document.querySelector('.q-location-long').innerHTML = position.coords.longitude; 
+			document.querySelector('.q-location-long').innerHTML = position.coords.longitude;
+			
+			var distance_lat = position.coords.latitude - checkpoint.lat;
+			var distance_long = position.coords.longitude - checkpoint.long;
+			var distance = Math.sqrt(distance_lat * distance_lat + distance_long * distance_long);
+
+			var locationElem = document.querySelector('.q-location-checkpoint');
+
+			locationElem.style.display = distance <= 0.0001 ? 'display' : 'none';
+			if (distance <= 0.00003) {
+				locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
+			} else if (distance <= 0.00006) {
+				locationElem.innerHTML = 'You are near the place!';
+			} else if (distance <= 0.0001) {
+				locationElem.innerHTML = 'Really hot!!!';
+			} else if (distance <= 0.00015) {
+				locationElem.innerHTML = 'Hotter';
+			} else {
+				locationElem.innerHTML = 'Cold';
+			}
 		}
 
 		function showError(error) {
