@@ -58,67 +58,67 @@
 		};
 
 		document.addEventListener('DOMContentLoaded', function () {
-			// var geo_options = {
-			// 	enableHighAccuracy: true,
-			// 	timeout: 5000,
-			// 	maximumAge: 0
-			// };
+			var geo_options = {
+				enableHighAccuracy: true,
+				timeout: 5000,
+				maximumAge: 0
+			};
 
-			// if (navigator.geolocation) {
-			// 	navigator.geolocation.watchPosition(showPosition, showError, geo_options);
-			// 	// navigator.geolocation.getCurrentPosition(
-			// } else {
-			// 	document.querySelector('.q-text-cont').innerHTML = "Geolocation is not supported by this browser.";
+			if (navigator.geolocation) {
+				navigator.geolocation.watchPosition(showPosition, showError, geo_options);
+				// navigator.geolocation.getCurrentPosition(
+			} else {
+				document.querySelector('.q-text-cont').innerHTML = "Geolocation is not supported by this browser.";
+			}
+			// function compassHeading(alpha, beta, gamma) {
+
+			// // Convert degrees to radians
+			// var alphaRad = alpha * (Math.PI / 180);
+			// var betaRad = beta * (Math.PI / 180);
+			// var gammaRad = gamma * (Math.PI / 180);
+
+			// // Calculate equation components
+			// var cA = Math.cos(alphaRad);
+			// var sA = Math.sin(alphaRad);
+			// var cB = Math.cos(betaRad);
+			// var sB = Math.sin(betaRad);
+			// var cG = Math.cos(gammaRad);
+			// var sG = Math.sin(gammaRad);
+
+			// // Calculate A, B, C rotation components
+			// var rA = - cA * sG - sA * sB * cG;
+			// var rB = - sA * sG + cA * sB * cG;
+			// var rC = - cB * cG;
+
+			// // Calculate compass heading
+			// var compassHeading = Math.atan(rA / rB);
+
+			// // Convert from half unit circle to whole unit circle
+			// if(rB < 0) {
+			// compassHeading += Math.PI;
+			// }else if(rA < 0) {
+			// compassHeading += 2 * Math.PI;
 			// }
-			function compassHeading(alpha, beta, gamma) {
 
-			// Convert degrees to radians
-			var alphaRad = alpha * (Math.PI / 180);
-			var betaRad = beta * (Math.PI / 180);
-			var gammaRad = gamma * (Math.PI / 180);
+			// // Convert radians to degrees
+			// compassHeading *= 180 / Math.PI;
 
-			// Calculate equation components
-			var cA = Math.cos(alphaRad);
-			var sA = Math.sin(alphaRad);
-			var cB = Math.cos(betaRad);
-			var sB = Math.sin(betaRad);
-			var cG = Math.cos(gammaRad);
-			var sG = Math.sin(gammaRad);
+			// return compassHeading;
 
-			// Calculate A, B, C rotation components
-			var rA = - cA * sG - sA * sB * cG;
-			var rB = - sA * sG + cA * sB * cG;
-			var rC = - cB * cG;
+			// }
 
-			// Calculate compass heading
-			var compassHeading = Math.atan(rA / rB);
+			// window.addEventListener('deviceorientation', function(evt) {
 
-			// Convert from half unit circle to whole unit circle
-			if(rB < 0) {
-			compassHeading += Math.PI;
-			}else if(rA < 0) {
-			compassHeading += 2 * Math.PI;
-			}
+			// var heading = null;
 
-			// Convert radians to degrees
-			compassHeading *= 180 / Math.PI;
+			// if(evt.absolute === true && evt.alpha !== null) {
+			// heading = compassHeading(evt.alpha, evt.beta, evt.gamma);
+			// }
+			// document.querySelector('.q-location-lat').innerHTML = `'HEADING', ${heading}, ${evt.alpha}, ${evt.beta}, ${evt.gamma}`;
 
-			return compassHeading;
+			// // Do something with 'heading'...
 
-			}
-
-			window.addEventListener('deviceorientation', function(evt) {
-
-			var heading = null;
-
-			if(evt.absolute === true && evt.alpha !== null) {
-			heading = compassHeading(evt.alpha, evt.beta, evt.gamma);
-			}
-			document.querySelector('.q-location-lat').innerHTML = `'HEADING', ${heading}, ${evt.alpha}, ${evt.beta}, ${evt.gamma}`;
-
-			// Do something with 'heading'...
-
-			}, false);
+			// }, false);
 		});
 		
 		function showPosition(position) {
@@ -145,10 +145,11 @@
 			// 48.458735, 35.070173
 			// 48.458937, 35.070577
 			console.log('DISTANCE', distance_lat, distance_long, '|', distance);
-			if (distance <= 0.0002) {
-				locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
-			} else if (distance <= 0.0004) {
-				locationElem.innerHTML = 'You are near the place!';
+			// if (distance <= 0.0002) {
+			// 	locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
+			// } else
+			if (distance <= 0.0004) {
+				locationElem.innerHTML = 'You are extremely close!';
 			} else if (distance <= 0.0008) {
 				locationElem.innerHTML = 'Really hot!!!';
 			} else if (distance <= 0.001) {
