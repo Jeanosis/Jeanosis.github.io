@@ -249,8 +249,7 @@
 			if (navigator.geolocation) {
 				navigator.geolocation.watchPosition(showPosition, showError, geo_options);
 			} else {
-				document.querySelector('.q-text-cont').innerHTML = 'Geolocation is not supported by this browser.';
-				document.querySelector('.q-not-robot').style.transform = 'translateX(100%)';
+				showError();
 			}
 
 			event.target.removeEventListener('click', clickAnswer);
@@ -294,7 +293,12 @@
 		}
 
 		function showError(error) {
-			console.log('Something went wrong', error);
+			document.querySelector('.q-text-cont').innerHTML = 'Geolocation is not supported by this browser.';
+			document.querySelector('.q-not-robot').style.transform = 'translateX(100%)';
+
+			if (error) {
+				console.log('Something went wrong', error);
+			}
 		}
 	</script>
 </body>
