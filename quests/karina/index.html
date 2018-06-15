@@ -127,6 +127,7 @@
 			document.querySelector('.q-location-long').innerHTML = position.coords.longitude;
 			
 			var currentCoords = latLongToKilometers(position.coords.latitude, position.coords.longitude);
+			console.log('CURRENT COORDS', currentCoords);
 			
 			var distance_lat = currentCoords.lat - checkpoint.lat;
 			var distance_long = currentCoords.long - checkpoint.long;
@@ -170,8 +171,8 @@
 
 		function latLongToKilometers(lat, long) {
 			return {
-				lat: lat / 110.574,
-				long: long / (111.320 * Math.cos(lat * Math.PI / 180))
+				lat: lat * 110.574,
+				long: long * (111.320 * Math.cos(lat * Math.PI / 180))
 			}; 
 		}
 
