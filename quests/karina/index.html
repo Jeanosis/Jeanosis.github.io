@@ -154,6 +154,8 @@
 				locationElem.innerHTML = 'Really hot!!!';
 			} else if (distance <= 0.001) {
 				locationElem.innerHTML = 'Hotter';
+			} else if (distance <= 0.002) {
+				locationElem.innerHTML = 'A bit hot';
 			} else {
 				locationElem.innerHTML = 'Cold';
 			}
