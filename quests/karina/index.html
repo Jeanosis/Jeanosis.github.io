@@ -50,12 +50,13 @@
 		</div>
 	</div>
 	<script>
-		var checkpoint = {
-			lat: 48.459358,
-			long: 35.064679
-			// lat: 48.458942,
-			// long: 35.070549
-		};
+		var checkpoint = latLongToKilometers(48.459358, 35.064679);
+		// {
+		// 	lat: 48.459358,
+		// 	long: 35.064679
+		// 	// lat: 48.458942,
+		// 	// long: 35.070549
+		// };
 
 		document.addEventListener('DOMContentLoaded', function () {
 			var geo_options = {
@@ -125,8 +126,12 @@
 			document.querySelector('.q-location-lat').innerHTML = position.coords.latitude;
 			document.querySelector('.q-location-long').innerHTML = position.coords.longitude;
 			
-			var distance_lat = position.coords.latitude - checkpoint.lat;
-			var distance_long = position.coords.longitude - checkpoint.long;
+			var currentCoords = latLongToKilometers(position.coords.latitude, position.coords.longitude);
+			
+			var distance_lat = currentCoords.lat - checkpoint.lat;
+			var distance_long = currentCoords.long - checkpoint.long;
+			// var distance_lat = position.coords.latitude - checkpoint.lat;
+			// var distance_long = position.coords.longitude - checkpoint.long;
 			var distance = Math.sqrt(distance_lat * distance_lat + distance_long * distance_long);
 
 			var locationElem = document.querySelector('.q-location-checkpoint');
@@ -148,19 +153,26 @@
 			// if (distance <= 0.0002) {
 			// 	locationElem.innerHTML = 'You are in Heisenberg Coffee Lab!';
 			// } else
-			if (distance <= 0.0004) {
+			if (distance <= 0.1) {//0.0004) {
 				locationElem.innerHTML = 'You are extremely close!';
-			} else if (distance <= 0.0008) {
+			} else if (distance <= 0.2) {//<= 0.0008) {
 				locationElem.innerHTML = 'Really hot!!!';
-			} else if (distance <= 0.001) {
+			} else if (distance <= 0.5) {//0.001) {
 				locationElem.innerHTML = 'Hotter';
-			} else if (distance <= 0.002) {
+			} else if (distance <= 1) {//0.002) {
 				locationElem.innerHTML = 'A bit hot';
 			} else {
 				locationElem.innerHTML = 'Cold';
 			}
 
 			document.querySelector('.q-location-distance').innerHTML = distance;
+		}
+
+		function latLongToKilometers(lat, long) {
+			return {
+				lat: lat / 110.574,
+				long: long / (111.320 * Math.cos(lat * Math.PI / 180))
+			}; 
 		}
 
 		function showError(error) {
