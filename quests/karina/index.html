@@ -114,7 +114,7 @@
 			if(evt.absolute === true && evt.alpha !== null) {
 			heading = compassHeading(evt.alpha, evt.beta, evt.gamma);
 			}
-			console.log('HEADING', heading, evt.alpha, evt.beta, evt.gamma);
+			document.querySelector('.q-location-lat').innerHTML = `'HEADING', ${heading}, ${evt.alpha}, ${evt.beta}, ${evt.gamma}`;
 
 			// Do something with 'heading'...
 
